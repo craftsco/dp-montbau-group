@@ -1,8 +1,505 @@
-<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="favicon.svg"><link rel="stylesheet" href="css/style.css"><title>Administrace | CRAFTS CO.</title></head><body class="admin-page">
-<header class="admin-header"><div class="container admin-header-inner"><a class="logo" href="index.html">CRAFTS<span>CO.</span></a><a class="back-link" href="index.html">← Web</a></div></header><main class="admin-main"><div class="container">
-<section id="login-panel" class="admin-card login-card"><p class="eyebrow">ADMINISTRACE</p><h1>Přihlášení</h1><p>Přihlaste se pro správu projektů.</p><form id="login-form" class="admin-form"><label>E-mail<input id="login-email" type="email" autocomplete="username" required></label><label>Heslo<input id="login-password" type="password" autocomplete="current-password" required></label><button class="btn btn-dark" type="submit">Přihlásit se</button><p id="login-message" class="form-message"></p></form></section>
-<section id="dashboard" hidden><div class="admin-toolbar"><div><p class="eyebrow">SPRÁVA PROJEKTŮ</p><h1>Projekty</h1><p id="logged-user" class="muted"></p></div><div class="toolbar-actions"><button id="new-project" class="btn btn-dark">+ Nový projekt</button><button id="logout" class="btn btn-outline">Odhlásit</button></div></div><div id="admin-message" class="form-message"></div>
-<div id="project-form-wrap" class="admin-card" hidden><div class="form-header"><div><p class="eyebrow">PROJEKT</p><h2 id="form-title">Nový projekt</h2></div><button id="cancel-edit" class="icon-button" type="button">×</button></div>
-<form id="project-form" class="admin-form"><input id="project-id" type="hidden"><div class="form-grid"><label>Název projektu *<input id="title" required maxlength="120" placeholder="Např. Rekonstrukce výrobní haly"></label><label>Typ práce *<input id="work_type" required maxlength="120" placeholder="Např. Průmyslové potrubí"></label><label>Začátek *<input id="start_date" type="date" required></label><label>Konec<input id="end_date" type="date"></label><label>Počet pracovníků<input id="workers" type="number" min="0" max="999" value="1"></label><label>Stav<select id="status"><option value="done">Dokončeno</option><option value="progress">Probíhá</option><option value="planned">Plánováno</option></select></label></div>
-<label>Krátký popis *<textarea id="excerpt" required maxlength="300" rows="3"></textarea></label><label>Detail projektu<textarea id="description" rows="8"></textarea></label><label>Fotografie<input id="image" type="file" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG nebo WebP. Doporučeno do cca 2 MB.</small></label><div id="current-image" class="current-image" hidden><img id="current-image-preview" alt="Aktuální fotografie"><label class="checkbox"><input id="remove-image" type="checkbox"> Odebrat aktuální fotografii</label></div><div class="form-actions"><button class="btn btn-dark" type="submit" id="save-project">Uložit projekt</button><button class="btn btn-outline" type="button" id="cancel-edit-2">Zrušit</button></div><p id="form-message" class="form-message"></p></form></div><div id="admin-projects" class="admin-projects"></div></section></div></main>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/config.js"></script><script src="js/admin.js"></script></body></html>
+<!doctype html>
+<html lang="cs">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <meta
+        name="robots"
+        content="noindex,nofollow"
+    >
+
+    <link rel="icon" href="favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Administrace | DP Montbau Group s.r.o.</title>
+
+</head>
+
+
+<body class="admin-page">
+
+
+<!-- ==================================================
+     ADMIN HEADER
+================================================== -->
+
+<header class="admin-header">
+
+    <div class="container admin-header-inner">
+
+        <a
+            class="logo"
+            href="index.html"
+        >
+
+            <span class="logo-dp">
+                DP
+            </span>
+
+            <span class="logo-name">
+                MONTBAU
+            </span>
+
+            <span class="logo-group">
+                GROUP
+            </span>
+
+        </a>
+
+
+        <a
+            class="admin-back"
+            href="index.html"
+        >
+            ← Zpět na web
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- ==================================================
+     ADMIN MAIN
+================================================== -->
+
+<main class="admin-main">
+
+    <div class="container">
+
+
+        <!-- ==================================================
+             LOGIN
+        ================================================== -->
+
+        <section
+            id="login-panel"
+            class="admin-card login-card"
+        >
+
+            <div class="admin-card-header">
+
+                <p class="eyebrow">
+                    ADMINISTRACE
+                </p>
+
+                <h1>
+                    Přihlášení
+                </h1>
+
+                <p>
+                    Přihlaste se pro správu
+                    realizovaných projektů.
+                </p>
+
+            </div>
+
+
+            <form
+                id="login-form"
+                class="admin-form"
+            >
+
+                <label>
+
+                    E-mail
+
+                    <input
+                        id="login-email"
+                        type="email"
+                        autocomplete="username"
+                        required
+                    >
+
+                </label>
+
+
+                <label>
+
+                    Heslo
+
+                    <input
+                        id="login-password"
+                        type="password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </label>
+
+
+                <button
+                    class="btn btn-red"
+                    type="submit"
+                >
+                    Přihlásit se
+                    <span>→</span>
+                </button>
+
+
+                <p
+                    id="login-message"
+                    class="form-message"
+                ></p>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ==================================================
+             DASHBOARD
+        ================================================== -->
+
+        <section
+            id="dashboard"
+            hidden
+        >
+
+
+            <!-- TOOLBAR -->
+
+            <div class="admin-toolbar">
+
+                <div>
+
+                    <p class="eyebrow">
+                        SPRÁVA PROJEKTŮ
+                    </p>
+
+                    <h1>
+                        Projekty
+                    </h1>
+
+                    <p
+                        id="logged-user"
+                        class="muted"
+                    ></p>
+
+                </div>
+
+
+                <div class="toolbar-actions">
+
+                    <button
+                        id="new-project"
+                        class="btn btn-red"
+                        type="button"
+                    >
+                        + Nový projekt
+                    </button>
+
+
+                    <button
+                        id="logout"
+                        class="btn btn-admin-outline"
+                        type="button"
+                    >
+                        Odhlásit
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="admin-message"
+                class="form-message"
+            ></div>
+
+
+
+            <!-- ==================================================
+                 PROJECT FORM
+            ================================================== -->
+
+            <div
+                id="project-form-wrap"
+                class="admin-card project-form-card"
+                hidden
+            >
+
+                <div class="form-header">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            PROJEKT
+                        </p>
+
+                        <h2 id="form-title">
+                            Nový projekt
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        id="cancel-edit"
+                        class="icon-button"
+                        type="button"
+                        aria-label="Zavřít"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+                <form
+                    id="project-form"
+                    class="admin-form"
+                >
+
+                    <input
+                        id="project-id"
+                        type="hidden"
+                    >
+
+
+                    <div class="form-grid">
+
+
+                        <label>
+
+                            Název projektu *
+
+                            <input
+                                id="title"
+                                required
+                                maxlength="120"
+                                placeholder="Např. Rekonstrukce výrobní haly"
+                            >
+
+                        </label>
+
+
+                        <label>
+
+                            Typ práce *
+
+                            <input
+                                id="work_type"
+                                required
+                                maxlength="120"
+                                placeholder="Např. Průmyslové potrubí"
+                            >
+
+                        </label>
+
+
+                        <label>
+
+                            Začátek *
+
+                            <input
+                                id="start_date"
+                                type="date"
+                                required
+                            >
+
+                        </label>
+
+
+                        <label>
+
+                            Konec
+
+                            <input
+                                id="end_date"
+                                type="date"
+                            >
+
+                        </label>
+
+
+                        <label>
+
+                            Počet pracovníků
+
+                            <input
+                                id="workers"
+                                type="number"
+                                min="0"
+                                max="999"
+                                value="1"
+                            >
+
+                        </label>
+
+
+                        <label>
+
+                            Stav
+
+                            <select id="status">
+
+                                <option value="done">
+                                    Dokončeno
+                                </option>
+
+                                <option value="progress">
+                                    Probíhá
+                                </option>
+
+                                <option value="planned">
+                                    Plánováno
+                                </option>
+
+                            </select>
+
+                        </label>
+
+
+                    </div>
+
+
+                    <label>
+
+                        Krátký popis *
+
+                        <textarea
+                            id="excerpt"
+                            required
+                            maxlength="300"
+                            rows="3"
+                            placeholder="Krátké shrnutí projektu..."
+                        ></textarea>
+
+                    </label>
+
+
+                    <label>
+
+                        Detail projektu
+
+                        <textarea
+                            id="description"
+                            rows="8"
+                            placeholder="Podrobný popis realizace..."
+                        ></textarea>
+
+                    </label>
+
+
+                    <label>
+
+                        Fotografie
+
+                        <input
+                            id="image"
+                            type="file"
+                            accept="image/jpeg,image/png,image/webp"
+                        >
+
+                        <small>
+                            JPG, PNG nebo WebP.
+                            Doporučeno do cca 2 MB.
+                        </small>
+
+                    </label>
+
+
+                    <div
+                        id="current-image"
+                        class="current-image"
+                        hidden
+                    >
+
+                        <p class="current-image-label">
+                            Aktuální fotografie
+                        </p>
+
+                        <img
+                            id="current-image-preview"
+                            alt="Aktuální fotografie"
+                        >
+
+
+                        <label class="checkbox">
+
+                            <input
+                                id="remove-image"
+                                type="checkbox"
+                            >
+
+                            Odebrat aktuální fotografii
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            class="btn btn-red"
+                            type="submit"
+                            id="save-project"
+                        >
+                            Uložit projekt
+                            <span>→</span>
+                        </button>
+
+
+                        <button
+                            class="btn btn-admin-outline"
+                            type="button"
+                            id="cancel-edit-2"
+                        >
+                            Zrušit
+                        </button>
+
+                    </div>
+
+
+                    <p
+                        id="form-message"
+                        class="form-message"
+                    ></p>
+
+                </form>
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 PROJECT LIST
+            ================================================== -->
+
+            <div
+                id="admin-projects"
+                class="admin-projects"
+            ></div>
+
+
+        </section>
+
+    </div>
+
+</main>
+
+
+
+<!-- ==================================================
+     SCRIPTS
+================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
+<script src="js/admin.js"></script>
+
+</body>
+
+</html>
