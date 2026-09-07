@@ -1,0 +1,11 @@
+create table if not exists public.projects (id uuid primary key default gen_random_uuid(),title text not null,start_date date not null,end_date date,work_type text not null,workers integer not null default 0 check(workers>=0),status text not null default 'done' check(status in('done','progress','planned')),excerpt text not null default '',description text not null default '',image_url text,created_at timestamptz not null default now());
+alter table public.projects enable row level security;
+drop policy if exists "Public can read projects" on public.projects; create policy "Public can read projects" on public.projects for select to anon,authenticated using(true);
+drop policy if exists "Authenticated can insert projects" on public.projects; create policy "Authenticated can insert projects" on public.projects for insert to authenticated with check(true);
+drop policy if exists "Authenticated can update projects" on public.projects; create policy "Authenticated can update projects" on public.projects for update to authenticated using(true) with check(true);
+drop policy if exists "Authenticated can delete projects" on public.projects; create policy "Authenticated can delete projects" on public.projects for delete to authenticated using(true);
+insert into storage.buckets(id,name,public) values('project-images','project-images',true) on conflict(id) do update set public=true;
+drop policy if exists "Public can view project images" on storage.objects; create policy "Public can view project images" on storage.objects for select to anon,authenticated using(bucket_id='project-images');
+drop policy if exists "Authenticated can upload project images" on storage.objects; create policy "Authenticated can upload project images" on storage.objects for insert to authenticated with check(bucket_id='project-images');
+drop policy if exists "Authenticated can delete project images" on storage.objects; create policy "Authenticated can delete project images" on storage.objects for delete to authenticated using(bucket_id='project-images');
+drop policy if exists "Authenticated can update project images" on storage.objects; create policy "Authenticated can update project images" on storage.objects for update to authenticated using(bucket_id='project-images') with check(bucket_id='project-images');

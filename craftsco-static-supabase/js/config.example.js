@@ -1,0 +1,2 @@
+window.SUPABASE_URL = "https://TVUJ-PROJEKT.supabase.co";
+window.SUPABASE_ANON_KEY = "TVUJ_PUBLISHABLE_KEY";
