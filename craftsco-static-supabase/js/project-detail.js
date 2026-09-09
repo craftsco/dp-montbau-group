@@ -24,7 +24,7 @@ async function loadProject() {
 
                 <a
                     class="btn btn-red"
-                    href="projekty.html"
+                    href="index.html#kontakt"
                 >
                     Zpět na aktuální zakázky
                     <span>→</span>
