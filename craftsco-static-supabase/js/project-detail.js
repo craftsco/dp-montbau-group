@@ -14,13 +14,21 @@ async function loadProject() {
             <div class="projects-empty">
 
                 <h3>
-                    Projekt nebyl nalezen.
+                    Nabídka nebyla nalezena.
                 </h3>
 
                 <p>
-                    Požadovaný projekt neexistuje
+                    Požadovaná pracovní nabídka neexistuje
                     nebo nebyl zadán správný odkaz.
                 </p>
+
+                <a
+                    class="btn btn-red"
+                    href="projekty.html"
+                >
+                    Zpět na aktuální zakázky
+                    <span>→</span>
+                </a>
 
             </div>
         `;
@@ -68,25 +76,42 @@ async function loadProject() {
             `
             : `
                 <div class="detail-image detail-image-placeholder">
+
                     <span>
                         DP MONTBAU
                     </span>
+
                 </div>
             `;
 
 
         c.innerHTML = `
 
+            <!-- ==========================================
+                 HEADER NABÍDKY
+            =========================================== -->
+
             <div class="project-detail-header">
 
                 <p class="eyebrow">
-                    REALIZACE
+                    AKTUÁLNÍ ZAKÁZKA
                 </p>
 
 
                 <h1>
                     ${escapeHtml(p.title)}
                 </h1>
+
+
+                ${
+                    p.excerpt
+                        ? `
+                            <p class="detail-lead detail-lead-top">
+                                ${escapeHtml(p.excerpt)}
+                            </p>
+                        `
+                        : ""
+                }
 
 
                 <div class="detail-meta">
@@ -114,7 +139,7 @@ async function loadProject() {
                     <span class="detail-meta-item">
 
                         <strong>
-                            Termín
+                            Termín zakázky
                         </strong>
 
                         ${escapeHtml(dates)}
@@ -125,13 +150,12 @@ async function loadProject() {
                     <span class="detail-meta-item">
 
                         <strong>
-                            Tým
+                            Počet pracovníků
                         </strong>
 
                         ${escapeHtml(
                             String(p.workers || 0)
                         )}
-                        pracovníků
 
                     </span>
 
@@ -140,20 +164,32 @@ async function loadProject() {
             </div>
 
 
+
+            <!-- ==========================================
+                 HLAVNÍ FOTO
+            =========================================== -->
+
             ${image}
 
 
+
+            <!-- ==========================================
+                 PODROBNOSTI NABÍDKY
+            =========================================== -->
+
             <div class="detail-description">
 
-                ${
-                    p.excerpt
-                        ? `
-                            <p class="detail-lead">
-                                ${escapeHtml(p.excerpt)}
-                            </p>
-                        `
-                        : ""
-                }
+                <div class="detail-section-heading">
+
+                    <p class="eyebrow">
+                        PODROBNOSTI ZAKÁZKY
+                    </p>
+
+                    <h2>
+                        Informace k nabídce
+                    </h2>
+
+                </div>
 
 
                 ${
@@ -163,8 +199,50 @@ async function loadProject() {
                                 ${escapeHtml(p.description)}
                             </div>
                         `
-                        : ""
+                        : `
+                            <div class="detail-text">
+                                Podrobnosti k této zakázce
+                                momentálně nejsou k dispozici.
+                            </div>
+                        `
                 }
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 KONTAKT
+            =========================================== -->
+
+            <div class="detail-contact-box">
+
+                <div>
+
+                    <p class="eyebrow">
+                        MÁTE ZÁJEM?
+                    </p>
+
+                    <h2>
+                        Chcete se přidat
+                        k této zakázce?
+                    </h2>
+
+                    <p>
+                        Ozvěte se nám a domluvíme
+                        další podrobnosti spolupráce.
+                    </p>
+
+                </div>
+
+
+                <a
+                    class="btn btn-red"
+                    href="index.html#kontakt"
+                >
+                    Kontaktujte nás
+                    <span>→</span>
+                </a>
 
             </div>
 
@@ -179,13 +257,21 @@ async function loadProject() {
             <div class="projects-empty">
 
                 <h3>
-                    Projekt nebylo možné načíst.
+                    Nabídku nebylo možné načíst.
                 </h3>
 
                 <p>
-                    Zkontroluj odkaz na projekt
+                    Zkontroluj odkaz na nabídku
                     a nastavení Supabase.
                 </p>
+
+                <a
+                    class="btn btn-red"
+                    href="projekty.html"
+                >
+                    Zpět na aktuální zakázky
+                    <span>→</span>
+                </a>
 
             </div>
         `;
