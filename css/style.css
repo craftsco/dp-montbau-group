@@ -4778,3 +4778,49 @@ p {
 
 }
 
+/* ==================================================
+   LOGO V HEADERU
+================================================== */
+
+.site-header .logo {
+    display: flex;
+    align-items: center;
+    width: 190px;
+    flex-shrink: 0;
+}
+
+.site-header .logo img {
+    display: block;
+    width: 190px;
+    height: auto;
+    max-height: 70px;
+    object-fit: contain;
+}
+
+.footer-brand .logo img {
+    display: block;
+    width: 190px;
+    height: auto;
+    max-height: 70px;
+    object-fit: contain;
+}
+
+/* Logo v sekci O nás */
+.about-image .image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    background: var(--white);
+    border: 1px solid rgba(201, 162, 74, 0.45);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.about-image .image-placeholder img {
+    display: block;
+    width: 80%;
+    max-width: 420px;
+    height: auto;
+    object-fit: contain;
+}
